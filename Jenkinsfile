@@ -29,7 +29,6 @@ pipeline {
 
     post {
         always {
-            always {
             sh '''
                 echo "Checking test report:"
                 pwd
