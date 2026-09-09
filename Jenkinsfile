@@ -19,6 +19,9 @@ pipeline {
                         -v "$WORKSPACE/test-results:/app/test-results" \
                         my-python-app-test \
                         pytest -v --junitxml=/app/test-results/pytest.xml
+
+                    echo "Files after pytest:"
+                    ls -la test-results
                 '''
             }
         }
@@ -26,6 +29,12 @@ pipeline {
 
     post {
         always {
+            always {
+            sh '''
+                echo "Checking test report:"
+                pwd
+                find . -name "*.xml" -print
+            '''
             junit 'test-results/*.xml'
         }
     }
